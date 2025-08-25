@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect } from 'vitest';
 import { empty } from './empty.js';
 import { DTypes } from '../core/dtypes.js';

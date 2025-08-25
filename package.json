@@ -2,7 +2,13 @@
   "name": "@numpyjs/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "sync-readme": "node scripts/sync-readme.js",
+    "build": "npx nx build numpyjs",
+    "test": "npx nx test numpyjs",
+    "lint": "npx nx lint numpyjs",
+    "typecheck": "npx nx typecheck numpyjs"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {

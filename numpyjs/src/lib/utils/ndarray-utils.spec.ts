@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { describe, it, expect, vi } from 'vitest';
 import { forEachIndex, calculateSize, validateShape } from './ndarray-utils.js';
 

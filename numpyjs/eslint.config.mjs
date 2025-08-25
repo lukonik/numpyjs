@@ -19,4 +19,12 @@ export default [
       parser: await import('jsonc-eslint-parser'),
     },
   },
+  {
+    // Disable certain rules for all test files
+    files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+    },
+  },
 ];

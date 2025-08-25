@@ -51,9 +51,19 @@
   ],
   "release": {
     "version": {
-      "preVersionCommand": "npx nx run-many -t build",
+      "preVersionCommand": "npx nx run-many -t build,test,lint",
       "conventionalCommits": true
-    }
+    },
+    "changelog": {
+      "workspaceChangelog": false,
+      "projectChangelogs": {
+        "numpyjs": {
+          "createRelease": "github"
+        }
+      }
+    },
+    "projects": ["numpyjs"],
+    "projectsRelationship": "independent"
   },
   "targetDefaults": {
     "test": {

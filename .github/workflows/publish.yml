@@ -5,22 +5,22 @@ on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  test:
-    name: Publish
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # needed to create releases and tags
       id-token: write # needed for provenance data generation
-    timeout-minutes: 10
+      pull-requests: write # needed to comment on released pull requests
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          filter: tree:0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Node
         uses: actions/setup-node@v4
@@ -30,15 +30,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        shell: bash
 
-      - name: Print Environment Info
-        run: npx nx report
-        shell: bash
+      - name: Initialize Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Publish packages
-        run: npx nx release publish
-        shell: bash
+      - name: Create release version and publish
+        run: npx nx release --skip-publish=false
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

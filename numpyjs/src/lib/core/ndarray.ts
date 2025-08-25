@@ -131,4 +131,5 @@ export class Ndarray {
       (this._buffer as ArrayBufferView & { [key: number]: number })[offset] = value;
     }
   }
+
 }

@@ -9,5 +9,8 @@ export { empty } from './lib/operations/empty.js';
 export { eye } from './lib/operations/eye.js';
 export { identity } from './lib/operations/identity.js';
 
+// Array manipulation operations
+export { astype } from './lib/operations/astype.js';
+
 // Utilities
 export { forEachIndex, calculateSize, validateShape } from './lib/utils/ndarray-utils.js';

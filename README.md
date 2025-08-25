@@ -2,7 +2,7 @@
 
 A TypeScript/JavaScript library for N-dimensional arrays with NumPy-compatible API. Built on top of JavaScript's TypedArrays for optimal performance.
 
-[![npm version](https://badge.fury.io/js/numpyjs.svg)](https://badge.fury.io/js/numpyjs)
+[![npm version](https://badge.fury.io/js/@tony-builder%2Fnumpyjs.svg)](https://badge.fury.io/js/@tony-builder%2Fnumpyjs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](https://www.typescriptlang.org/)
 
@@ -18,21 +18,21 @@ A TypeScript/JavaScript library for N-dimensional arrays with NumPy-compatible A
 ## Installation
 
 ```bash
-npm install numpyjs
+npm install @tony-builder/numpyjs
 ```
 
 ```bash
-yarn add numpyjs
+yarn add @tony-builder/numpyjs
 ```
 
 ```bash
-pnpm add numpyjs
+pnpm add @tony-builder/numpyjs
 ```
 
 ## Quick Start
 
 ```typescript
-import { zeros, ones, eye, identity, empty, Ndarray, DTypes } from 'numpyjs';
+import { zeros, ones, eye, identity, empty, Ndarray, DTypes } from '@tony-builder/numpyjs';
 
 // Create arrays filled with specific values
 const zeroArray = zeros([3, 3]);           // 3×3 array of zeros
@@ -142,7 +142,7 @@ enum DTypes {
 ### Basic Array Operations
 
 ```typescript
-import { zeros, ones, DTypes } from 'numpyjs';
+import { zeros, ones, DTypes } from '@tony-builder/numpyjs';
 
 // Create and manipulate 2D array
 const matrix = zeros([3, 4], DTypes.Float32Array);
@@ -160,7 +160,7 @@ console.log(matrix.at(0, 1)); // 0
 ### Working with Different Shapes
 
 ```typescript
-import { empty, ones } from 'numpyjs';
+import { empty, ones } from '@tony-builder/numpyjs';
 
 // 1D array
 const vector = ones([5]);
@@ -178,7 +178,7 @@ const hyperTensor = zeros([2, 2, 2, 2]);
 ### Performance Considerations
 
 ```typescript
-import { empty, zeros } from 'numpyjs';
+import { empty, zeros } from '@tony-builder/numpyjs';
 
 // For best performance, use empty() when you'll initialize all values
 const fastArray = empty([1000, 1000]);

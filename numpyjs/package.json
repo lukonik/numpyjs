@@ -1,6 +1,16 @@
 {
   "name": "@tony-builder/numpyjs",
   "version": "2.0.0",
+  "description": "N-dimensional arrays for JavaScript with NumPy-like API",
+  "keywords": ["numpy", "ndarray", "arrays", "mathematics", "scientific-computing", "typescript"],
+  "author": "Tony Builder",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tony-builder/numpyjs.git",
+    "directory": "numpyjs"
+  },
+  "homepage": "https://github.com/tony-builder/numpyjs#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

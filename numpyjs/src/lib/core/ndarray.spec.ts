@@ -120,15 +120,6 @@ describe('Ndarray', () => {
       expect(arr.buffer).toBeInstanceOf(Float64Array);
     });
 
-    it('should create BigInt64Array buffer', () => {
-      const arr = new Ndarray([3], DTypes.BigInt64Array);
-      expect(arr.buffer).toBeInstanceOf(BigInt64Array);
-    });
-
-    it('should create BigUint64Array buffer', () => {
-      const arr = new Ndarray([3], DTypes.BigUint64Array);
-      expect(arr.buffer).toBeInstanceOf(BigUint64Array);
-    });
 
     it('should throw error for Float16Array', () => {
       expect(() => {
@@ -216,16 +207,6 @@ describe('Ndarray', () => {
       expect(arr.at(1, 1, 1)).toBe(4.5);
     });
 
-    it('should work with BigInt arrays', () => {
-      const arr = new Ndarray([2, 2], DTypes.BigInt64Array);
-      
-      arr.set(123n, 0, 0);
-      arr.set(-456n, 1, 1);
-      
-      expect(arr.at(0, 0)).toBe(123n);
-      expect(arr.at(1, 1)).toBe(-456n);
-      expect(arr.at(0, 1)).toBe(0n);
-    });
 
     it('should handle memory layout correctly with custom strides', () => {
       const buffer = new Float32Array([1, 2, 3, 4, 5, 6]);

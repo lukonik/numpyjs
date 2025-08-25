@@ -89,10 +89,6 @@ export class Ndarray {
         return new Float32Array(size);
       case DTypes.Float64Array:
         return new Float64Array(size);
-      case DTypes.BigInt64Array:
-        return new BigInt64Array(size);
-      case DTypes.BigUint64Array:
-        return new BigUint64Array(size);
       case DTypes.Float16Array:
         throw new Error('Float16Array not supported in this environment');
       default:
@@ -100,7 +96,7 @@ export class Ndarray {
     }
   }
 
-  at(...indices: number[]): number | bigint | undefined {
+  at(...indices: number[]): number | undefined {
     if (indices.length !== this.ndim) {
       throw new Error(`Expected ${this.ndim} indices, got ${indices.length}`);
     }
@@ -112,10 +108,10 @@ export class Ndarray {
     }
     
     const offset = this._offset + indices.reduce((acc, idx, i) => acc + idx * this._strides[i], 0);
-    return (this._buffer as ArrayBufferView & { [key: number]: number | bigint })?.[offset];
+    return (this._buffer as ArrayBufferView & { [key: number]: number })?.[offset];
   }
 
-  set(value: number | bigint, ...indices: number[]): void {
+  set(value: number, ...indices: number[]): void {
     if (indices.length !== this.ndim) {
       throw new Error(`Expected ${this.ndim} indices, got ${indices.length}`);
     }
@@ -128,7 +124,7 @@ export class Ndarray {
     
     const offset = this._offset + indices.reduce((acc, idx, i) => acc + idx * this._strides[i], 0);
     if (this._buffer) {
-      (this._buffer as ArrayBufferView & { [key: number]: number | bigint })[offset] = value;
+      (this._buffer as ArrayBufferView & { [key: number]: number })[offset] = value;
     }
   }
 }

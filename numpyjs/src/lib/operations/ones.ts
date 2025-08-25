@@ -40,10 +40,8 @@ export function ones(shape: number[], dtype: DTypes = DTypes.Float64Array): Ndar
   const arr = new Ndarray(shape, dtype);
   
   // Fill with ones using the Ndarray set method and forEachIndex utility
-  const value = (dtype === DTypes.BigInt64Array || dtype === DTypes.BigUint64Array) ? 1n : 1;
-  
   forEachIndex(shape, (indices) => {
-    arr.set(value, ...indices);
+    arr.set(1, ...indices);
   });
   
   return arr;

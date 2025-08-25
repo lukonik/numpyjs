@@ -1,6 +1,10 @@
 {
   "name": "@tony-builder/numpyjs",
-  "version": "2.0.0-0",
+  "version": "2.0.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

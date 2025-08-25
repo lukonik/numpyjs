@@ -1,6 +1,6 @@
 import { Ndarray } from '../core/ndarray.js';
 import { DTypes } from '../core/dtypes.js';
-import { forEachIndex, validateShape } from '../utils/ndarray-utils.js';
+import { forEachIndex } from '../utils/ndarray-utils.js';
 
 /**
  * Creates an Ndarray filled with ones.
@@ -33,10 +33,7 @@ import { forEachIndex, validateShape } from '../utils/ndarray-utils.js';
  * @see {@link https://numpy.org/doc/stable/reference/generated/numpy.ones.html | NumPy ones documentation}
  */
 export function ones(shape: number[], dtype: DTypes = DTypes.Float64Array): Ndarray {
-  // Validate shape using utility function
-  validateShape(shape);
-  
-  // Create the array
+  // Create the array (validation happens in Ndarray constructor)
   const arr = new Ndarray(shape, dtype);
   
   // Fill with ones using the Ndarray set method and forEachIndex utility

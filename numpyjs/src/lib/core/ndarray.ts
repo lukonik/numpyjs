@@ -1,4 +1,5 @@
 import { DTypes } from './dtypes.js';
+import { validateShape } from '../utils/ndarray-utils.js';
 
 export class Ndarray {
   private _shape: number[];
@@ -14,6 +15,9 @@ export class Ndarray {
     offset = 0,
     strides?: number[]
   ) {
+    // Validate shape at construction time
+    validateShape(shape);
+    
     this._shape = [...shape];
     this._type = type;
     this._offset = offset;

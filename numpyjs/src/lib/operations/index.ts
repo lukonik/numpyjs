@@ -9,3 +9,4 @@ export { ones } from './ones.js';
 export { zeros } from './zeros.js';
 export { eye } from './eye.js';
 export { identity } from './identity.js';
+export { empty } from './empty.js';

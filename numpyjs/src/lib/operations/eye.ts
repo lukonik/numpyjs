@@ -1,6 +1,6 @@
 import { Ndarray } from '../core/ndarray.js';
 import { DTypes } from '../core/dtypes.js';
-import { forEachIndex, validateShape } from '../utils/ndarray-utils.js';
+import { forEachIndex } from '../utils/ndarray-utils.js';
 
 /**
  * Creates a 2-D array with ones on the diagonal and zeros elsewhere.
@@ -69,9 +69,8 @@ export function eye(
     throw new Error(`k must be an integer, got ${k}`);
   }
   
-  // Create the 2D array
+  // Create the 2D array (validation happens in Ndarray constructor)
   const shape = [N, cols];
-  validateShape(shape);
   const arr = new Ndarray(shape, dtype);
   
   // Fill with zeros first, then set diagonal elements to 1

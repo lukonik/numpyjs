@@ -13,7 +13,7 @@ A TypeScript/JavaScript library for N-dimensional arrays with NumPy-compatible A
 - 🧮 **NumPy API**: Familiar API for users coming from NumPy/Python
 - 🔧 **TypeScript**: Full type safety with comprehensive TypeScript definitions
 - 🎯 **Zero Dependencies**: Lightweight with no external dependencies
-- ✅ **Well Tested**: Comprehensive test suite with 200+ tests
+- ✅ **Well Tested**: Comprehensive test suite with 330+ tests
 
 ## Installation
 
@@ -32,11 +32,12 @@ pnpm add @tony-builder/numpyjs
 ## Quick Start
 
 ```typescript
-import { zeros, ones, eye, identity, empty, Ndarray, DTypes } from '@tony-builder/numpyjs';
+import { zeros, ones, full, eye, identity, empty, toArray, print, Ndarray, DTypes } from '@tony-builder/numpyjs';
 
 // Create arrays filled with specific values
 const zeroArray = zeros([3, 3]);           // 3×3 array of zeros
-const onesArray = ones([2, 4]);            // 2×4 array of ones
+const onesArray = ones([2, 4]);            // 2×4 array of ones  
+const fullArray = full([2, 3], 7.5);       // 2×3 array filled with 7.5
 const emptyArray = empty([5, 5]);          // 5×5 uninitialized array
 
 // Create identity and diagonal matrices
@@ -58,6 +59,10 @@ console.log(arr.size);                    // 6
 console.log(arr.ndim);                    // 2
 console.log(arr.dtype);                   // 'Float64Array'
 console.log(arr.strides);                 // [3, 1]
+
+// Convert to JavaScript arrays and print
+const jsArray = toArray(arr);             // Convert to nested JS array
+print(arr);                               // Pretty print to console
 ```
 
 ## API Reference
@@ -106,6 +111,15 @@ const I = identity(5);                    // 5×5 identity matrix
 const I32 = identity(3, DTypes.Int32Array); // 3×3 int32 identity
 ```
 
+#### `full(shape, fillValue, dtype?)`
+Creates an array filled with a specific value.
+
+```typescript
+const arr = full([2, 3], 7.5);           // 2×3 array filled with 7.5
+const intArr = full([4], -1, DTypes.Int32Array); // 1D int32 array of -1s
+const piArray = full([3, 3], Math.PI);   // 3×3 array filled with π
+```
+
 ### Ndarray Class
 
 #### Properties
@@ -119,6 +133,44 @@ const I32 = identity(3, DTypes.Int32Array); // 3×3 int32 identity
 #### Methods
 - `at(...indices: number[]): number` - Get element at indices
 - `set(value: number, ...indices: number[]): void` - Set element at indices
+
+### Array Manipulation Functions
+
+#### `toArray(arr)`
+Converts an n-dimensional array to a nested JavaScript array.
+
+```typescript
+const arr = full([2, 3], 42);
+const jsArray = toArray(arr);             // [[42, 42, 42], [42, 42, 42]]
+
+// Works with any dimensions
+const arr3d = full([2, 1, 2], 1.5);
+const nested = toArray(arr3d);            // [[[1.5, 1.5]], [[1.5, 1.5]]]
+```
+
+### Display Functions
+
+#### `print(arr, options?)`
+Prints an array to the console in a formatted way, similar to NumPy's print.
+
+```typescript
+const matrix = full([3, 3], Math.PI);
+print(matrix);
+// Output:
+// [[3.141593 3.141593 3.141593]
+//  [3.141593 3.141593 3.141593]
+//  [3.141593 3.141593 3.141593]]
+
+// Customize formatting
+print(matrix, { precision: 2 });         // Show 2 decimal places
+print(matrix, { threshold: 10 });        // Summarize if array > 10 elements
+```
+
+**Options:**
+- `precision?: number` - Number of decimal places (default: 6)
+- `suppressSmall?: boolean` - Suppress very small numbers (default: false)  
+- `threshold?: number` - Total elements that trigger summarization (default: 1000)
+- `edgeItems?: number` - Items shown at beginning/end when summarizing (default: 3)
 
 ### Supported Data Types
 
@@ -142,7 +194,7 @@ enum DTypes {
 ### Basic Array Operations
 
 ```typescript
-import { zeros, ones, DTypes } from '@tony-builder/numpyjs';
+import { zeros, ones, full, toArray, print, DTypes } from '@tony-builder/numpyjs';
 
 // Create and manipulate 2D array
 const matrix = zeros([3, 4], DTypes.Float32Array);
@@ -155,12 +207,38 @@ for (let i = 0; i < Math.min(3, 4); i++) {
 // Access elements
 console.log(matrix.at(0, 0)); // 1
 console.log(matrix.at(0, 1)); // 0
+
+// Convert to JavaScript array
+const jsMatrix = toArray(matrix);
+console.log(jsMatrix[0]); // [1, 0, 0, 0]
+
+// Pretty print the matrix
+print(matrix);
+// Output:
+// [[1 0 0 0]
+//  [0 1 0 0] 
+//  [0 0 1 0]]
+```
+
+### Working with Custom Fill Values
+
+```typescript
+import { full, print } from '@tony-builder/numpyjs';
+
+// Create arrays with custom values
+const temperatures = full([7], 23.5);     // Week of temperatures (°C)
+const prices = full([3, 4], 9.99);        // 3×4 price matrix
+const flags = full([10], -1, DTypes.Int8Array); // Array of flags
+
+// Print with custom formatting
+print(temperatures, { precision: 1 });   // [23.5 23.5 23.5 23.5 23.5 23.5 23.5]
+print(prices, { precision: 2 });         // Show currency with 2 decimals
 ```
 
 ### Working with Different Shapes
 
 ```typescript
-import { empty, ones } from '@tony-builder/numpyjs';
+import { empty, ones, zeros } from '@tony-builder/numpyjs';
 
 // 1D array
 const vector = ones([5]);
@@ -215,12 +293,16 @@ numpyjs/
 │   │   ├── core/           # Core classes
 │   │   │   ├── ndarray.ts  # Ndarray class
 │   │   │   └── dtypes.ts   # Data type definitions
-│   │   ├── operations/     # Array creation functions
-│   │   │   ├── zeros.ts
+│   │   ├── operations/     # Array functions
+│   │   │   ├── zeros.ts    # Array creation
 │   │   │   ├── ones.ts
 │   │   │   ├── empty.ts
+│   │   │   ├── full.ts
 │   │   │   ├── eye.ts
-│   │   │   └── identity.ts
+│   │   │   ├── identity.ts
+│   │   │   ├── toArray.ts  # Array manipulation
+│   │   │   ├── print.ts    # Display functions
+│   │   │   └── astype.ts
 │   │   └── utils/          # Utility functions
 │   │       └── ndarray-utils.ts
 │   └── index.ts           # Main entry point

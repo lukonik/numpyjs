@@ -12,6 +12,7 @@ export { full } from './lib/operations/full.js';
 
 // Array manipulation operations
 export { astype } from './lib/operations/astype.js';
+export { toArray } from './lib/operations/toArray.js';
 
 // Utilities
 export { forEachIndex, calculateSize, validateShape } from './lib/utils/ndarray-utils.js';

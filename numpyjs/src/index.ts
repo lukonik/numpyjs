@@ -14,5 +14,8 @@ export { full } from './lib/operations/full.js';
 export { astype } from './lib/operations/astype.js';
 export { toArray } from './lib/operations/toArray.js';
 
+// Display operations
+export { print } from './lib/operations/print.js';
+
 // Utilities
 export { forEachIndex, calculateSize, validateShape } from './lib/utils/ndarray-utils.js';

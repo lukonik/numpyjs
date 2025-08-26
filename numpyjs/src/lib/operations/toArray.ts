@@ -1,5 +1,7 @@
 import { Ndarray } from '../core/ndarray.js';
 
+type NestedNumberArray = number | NestedNumberArray[];
+
 /**
  * Convert an n-dimensional array to a nested JavaScript array.
  * 
@@ -29,19 +31,19 @@ import { Ndarray } from '../core/ndarray.js';
  * 
  * @see https://numpy.org/doc/stable/reference/generated/numpy.ndarray.tolist.html
  */
-export function toArray(arr: Ndarray): any {
+export function toArray(arr: Ndarray): NestedNumberArray {
   if (arr.size === 0) {
     return createNestedArray(arr.shape, []);
   }
   
   return createNestedArray(arr.shape, []);
 
-  function createNestedArray(shape: number[], currentIndices: number[]): any {
+  function createNestedArray(shape: number[], currentIndices: number[]): NestedNumberArray {
     if (currentIndices.length === shape.length) {
-      return arr.at(...currentIndices);
+      return arr.at(...currentIndices) ?? 0;
     }
     
-    const result = [];
+    const result: NestedNumberArray[] = [];
     const currentDim = shape[currentIndices.length];
     
     for (let i = 0; i < currentDim; i++) {
